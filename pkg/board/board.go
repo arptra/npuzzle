@@ -10,10 +10,17 @@ type EmptyTileMove struct {
 	Y    int
 }
 
-var MoveUP = EmptyTileMove{"UP", 0, -1}
-var MoveDown = EmptyTileMove{"Down", 0, 1}
-var MoveLeft = EmptyTileMove{"Left", -1, 0}
-var MoveRight = EmptyTileMove{"Right", 1, 0}
+//var MoveUP = EmptyTileMove{"UP", 0, -1}
+//var MoveDown = EmptyTileMove{"DOWN", 0, 1}
+//var MoveLeft = EmptyTileMove{"LEFT", -1, 0}
+//var MoveRight = EmptyTileMove{"RIGHT", 1, 0}
+//var InitMove = EmptyTileMove{"NULL", 0, 0}
+
+
+var MoveUP = EmptyTileMove{"N", 0, -1}
+var MoveDown = EmptyTileMove{"S", 0, 1}
+var MoveLeft = EmptyTileMove{"W", -1, 0}
+var MoveRight = EmptyTileMove{"E", 1, 0}
 var InitMove = EmptyTileMove{"NULL", 0, 0}
 
 //var Moves = []EmptyTileMove{MoveUP, MoveDown, MoveLeft, MoveRight}
@@ -25,11 +32,8 @@ type StateOfBoard struct {
 	PrevEmptyTilePosition int
 	EmptyTilePosition     int
 	CurrentBoardState     []int
-	StateID               int
-}
-
-func GetStateID() int {
-	return 0
+	From *StateOfBoard
+	To *StateOfBoard
 }
 
 func generate(w int, h int, x int, y int) int {
@@ -74,7 +78,6 @@ func CreateNewState(state StateOfBoard, boardState []int, newPos, oldPos int) St
 	newState := new(StateOfBoard)
 	newState.Size = state.Size
 	newState.CurrentBoardState = boardState
-	newState.StateID = GetStateID()
 	newState.PrevEmptyTilePosition = oldPos
 	newState.EmptyTilePosition = newPos
 	newState.EmptyTile = state.EmptyTile

@@ -6,32 +6,33 @@ import (
 )
 
 func main() {
-	//firstState := []int{8, 2, 6, 3, 9, 4, 7, 5, 1}
-	firstState := []int{1, 2, 3, 0, 4, 6, 7, 5, 8}
+	firstState := []int{8, 2, 6, 3, 9, 4, 7, 5, 1}
+	//firstState := []int{1, 2, 3, 0, 4, 6, 7, 5, 8}
 	State := board.StateOfBoard{
 		3,
 		board.InitMove,
-		3,
-		3,
+		4,
+		4,
 		firstState,
-		board.GetStateID(),
+		nil,
+		nil,
 	}
-	test := []int{1, 2, 3, 4, 5, 6, 7, 8, 0}
+	//test := []int{1, 2, 3, 4, 5, 6, 7, 8, 0}
 	goalState := board.StateOfBoard{
 		3,
 		board.InitMove,
-		3,
-		3,
-		//board.GetGoalState(3),
-		test,
-		board.GetStateID(),
+		4,
+		4,
+		board.GetGoalState(3),
+		//test,
+		nil,
+		nil,
 	}
-	board.PrintState(State)
-	board.PrintState(goalState)
-	all := board.GetAllState(State)
-	for _, v := range all {
-		board.PrintState(v)
-	}
+	//board.PrintState(State)
+	//board.PrintState(goalState)
+	//all := board.GetAllState(State)
+	//for _, v := range all {
+	//	board.PrintState(v)
+	//}
 	algo.AlgoStart(State, goalState)
-
 }

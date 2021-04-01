@@ -15,7 +15,7 @@ func ManhattanDist(state, goal board.StateOfBoard) float64 {
 	var total float64
 	total = 0
 	for ii := range state.CurrentBoardState {
-		if state.CurrentBoardState[ii] != 0 {
+		if state.CurrentBoardState[ii] != 9 {
 			n, err := goal.FindN(state.CurrentBoardState[ii])
 			if err != nil {
 				panic(err)
