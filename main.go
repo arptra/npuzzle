@@ -3,6 +3,7 @@ package main
 import (
 	"N-puzzle-GO/pkg/algo"
 	"N-puzzle-GO/pkg/board"
+	"N-puzzle-GO/pkg/visu"
 )
 
 func main() {
@@ -35,4 +36,6 @@ func main() {
 	//	board.PrintState(v)
 	//}
 	algo.AlgoStart(State, goalState)
+
+	visu.AppWindow()
 }
