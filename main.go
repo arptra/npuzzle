@@ -29,8 +29,8 @@ func main() {
 		nil,
 		nil,
 	}
-	//board.PrintState(State)
-	//board.PrintState(goalState)
+	board.PrintState(State)
+	board.PrintState(goalState)
 	//all := board.GetAllState(State)
 	//for _, v := range all {
 	//	board.PrintState(v)
