@@ -16,6 +16,6 @@ func PrintBoard(board []int, size int) {
 }
 
 func PrintState(state StateOfBoard) {
-	fmt.Printf("%+v\n", state)
+	//fmt.Printf("%+v\n", state)
 	PrintBoard(state.CurrentBoardState, state.Size)
 }

@@ -11,8 +11,8 @@ func main() {
 	State := board.StateOfBoard{
 		3,
 		board.InitMove,
-		4,
-		4,
+		1,
+		1,
 		firstState,
 		nil,
 		nil,
@@ -21,8 +21,8 @@ func main() {
 	goalState := board.StateOfBoard{
 		3,
 		board.InitMove,
-		4,
-		4,
+		1,
+		1,
 		board.GetGoalState(3),
 		//test,
 		nil,
