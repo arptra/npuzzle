@@ -2,21 +2,24 @@ package main
 
 import (
 	"N-puzzle-GO/pkg/algo"
+	"N-puzzle-GO/pkg/apiserver"
 	"N-puzzle-GO/pkg/board"
-	"fmt"
 	"log"
+	"math"
 	"os"
 )
 
+//var firstState map[string][]int
+
 func manual() {
-	firstState := []int{8, 2, 6, 3, 9, 4, 7, 5, 1}
-	//firstState := []int{1, 2, 3, 0, 4, 6, 7, 5, 8}
+	manualFirstState := []int{8, 2, 6, 3, 9, 4, 7, 5, 1}
+	//manualFirstState := []int{1, 2, 3, 0, 4, 6, 7, 5, 8}
 	State := board.StateOfBoard{
 		3,
 		board.InitMove,
 		4,
 		4,
-		firstState,
+		manualFirstState,
 		nil,
 		nil,
 	}
@@ -42,8 +45,28 @@ func manual() {
 
 func automatic() {
 	//var firstState []int
-	//apiserver.ApiServerStart(&firstState)
-	fmt.Println("auto")
+	//firstState := make(map[string][]int)
+	apiserver.ApiServerStart(&firstState)
+	key := "firstState"
+	State := board.StateOfBoard{
+		int(math.Sqrt(float64(len(firstState[key])))),
+		board.InitMove,
+		firstState[key][len(firstState[key])],
+		firstState[key][len(firstState)],
+		firstState[key],
+		nil,
+		nil,
+	}
+	goalState := board.StateOfBoard{
+		int(math.Sqrt(float64(len(firstState[key])))),
+		board.InitMove,
+		firstState[key][len(firstState[key])],
+		firstState[key][len(firstState)],
+		board.GetGoalState(int(math.Sqrt(float64(len(firstState[key]))))),
+		nil,
+		nil,
+	}
+	algo.AlgoStart(State, goalState)
 }
 
 func main() {

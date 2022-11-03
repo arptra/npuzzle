@@ -6,7 +6,7 @@ DOCKER_HUB_LOGIN=dmarsell
 
 all: test build ## Test and build
 
-re: clean run ## Clean and run
+re: clean build ## Clean and run
 
 test: ## Run all the tests
 	go test -covermode=atomic -v -race -timeout=30s ./...
@@ -24,8 +24,8 @@ mod: ## Check mod dependencies
 run: build ## Build and run an exec file
 	./$(NAME)
 
-run-manual: build ## Build and run an exec file
-	./$(NAME) 1 2 3 4
+manual: build ## Build and run an exec file
+	./$(NAME) manual
 
 clean: ## Remove exec file
 	go clean && rm -rf $(NAME)

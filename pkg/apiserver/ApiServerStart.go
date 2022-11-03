@@ -1,12 +1,14 @@
 package apiserver
 
 import (
-	//handler "N-puzzle-GO/api"
+	handler "N-puzzle-GO/api"
 	"github.com/gin-gonic/gin"
 )
 
-func ApiServerStart(config *configs.Config) {
+var firstState map[string][]int
+
+func ApiServerStart() {
 	router := gin.Default()
-	//handler.RequestHandler(router)
+	handler.RequestHandler(router)
 	router.Run()
 }
