@@ -24,6 +24,9 @@ mod: ## Check mod dependencies
 run: build ## Build and run an exec file
 	./$(NAME)
 
+run-manual: build ## Build and run an exec file
+	./$(NAME) 1 2 3 4
+
 clean: ## Remove exec file
 	go clean && rm -rf $(NAME)
 
