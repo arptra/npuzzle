@@ -1,6 +1,7 @@
 package main
 
 import (
+	"N-puzzle-GO/globalvars"
 	"N-puzzle-GO/pkg/algo"
 	"N-puzzle-GO/pkg/apiserver"
 	"N-puzzle-GO/pkg/board"
@@ -45,6 +46,7 @@ func main() {
 		log.Fatal("usage: ./npuzzle manual | ./npuzzle")
 	}
 	if len(os.Args) == 1 {
+		globalvars.SERVER_MODE = true
 		apiserver.ApiServerStart()
 	} else {
 		manual()

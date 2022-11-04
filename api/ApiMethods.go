@@ -1,6 +1,7 @@
 package api
 
 import (
+	"N-puzzle-GO/globalvars"
 	"N-puzzle-GO/pkg/algo"
 	"N-puzzle-GO/pkg/board"
 	"fmt"
@@ -9,17 +10,24 @@ import (
 	"net/http"
 )
 
-func PutState(context *gin.Context) {
-	var FirstState map[string][]int
-	var arr []int
-	key := "firstState"
+func GetPath(context *gin.Context) {
+	if globalvars.ALGO_END == true {
+		context.JSON(200, globalvars.SuccessPath)
+	} else {
+		context.AbortWithStatus(202)
+	}
+}
 
-	if err := context.ShouldBindJSON(&FirstState); err != nil {
+func PutState(context *gin.Context) {
+	var arr []int
+
+	if err := context.ShouldBindJSON(&globalvars.InputState); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	globalvars.ALGO_END = false // if previous GET request not 200
 
-	arr = FirstState[key]
+	arr = globalvars.InputState[globalvars.InputKey]
 	fmt.Println(arr)
 	state := board.StateOfBoard{
 		int(math.Sqrt(float64(len(arr)))),

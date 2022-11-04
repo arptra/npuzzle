@@ -1,6 +1,7 @@
 package algo
 
 import (
+	"N-puzzle-GO/globalvars"
 	"N-puzzle-GO/pkg/board"
 	"fmt"
 	"math"
@@ -15,7 +16,7 @@ func AlgoStart(start, goal board.StateOfBoard) int {
 		temp := Search(start, goal, 0, threshold) //function search(node,g score,threshold)
 		fmt.Println(threshold)
 		if FOUND { // if goal FOUND
-			FOUND = false // for work in server-mode
+			FOUND = false // for SERVER_MODE == true
 			return 1
 		}
 		if temp == math.MaxInt32 { //Threshold larger than maximum possible f value
@@ -33,7 +34,12 @@ func Search(node, goal board.StateOfBoard, g, threshold float64) float64 {
 	if board.BoardEquals(node, goal) {
 		FOUND = true
 		path := getRecursivePath(node)
-		printPath(path)
+		if globalvars.SERVER_MODE == false {
+			printPath(path)
+		} else {
+			savePath(path)
+			printPath(path)
+		}
 		return f
 	}
 	min := math.MaxFloat64
