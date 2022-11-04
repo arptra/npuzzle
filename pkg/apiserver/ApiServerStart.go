@@ -5,8 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var firstState map[string][]int
-
 func ApiServerStart() {
 	router := gin.Default()
 	handler.RequestHandler(router)
