@@ -6,7 +6,7 @@ DOCKER_HUB_LOGIN=dmarsell
 
 all: test build ## Test and build
 
-re: clean build ## Clean and run
+re: clean build run ## Clean, rebuild and run
 
 test: ## Run all the tests
 	go test -covermode=atomic -v -race -timeout=30s ./...

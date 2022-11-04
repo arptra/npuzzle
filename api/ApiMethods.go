@@ -48,9 +48,7 @@ func PutState(context *gin.Context) {
 		nil,
 	}
 	board.PrintState(state)
-	//fmt.Println(state.Size, state.EmptyTile, state.PrevEmptyTilePosition, state.EmptyTilePosition, state.CurrentBoardState, state.From, state.To)
 	board.PrintState(goalState)
-	//fmt.Println(goalState.Size, goalState.EmptyTile, goalState.PrevEmptyTilePosition, goalState.EmptyTilePosition, goalState.CurrentBoardState, goalState.From, goalState.To)
 
 	algo.AlgoStart(state, goalState)
 }

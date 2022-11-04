@@ -10,8 +10,9 @@ import (
 )
 
 func manual() {
-	firstState := []int{8, 2, 6, 3, 9, 4, 7, 5, 1} // work
 	//firstState := []int{6, 9, 8, 3, 1, 5, 7, 4, 2} // doesnt-work
+	//firstState := []int{8, 2, 6, 3, 9, 4, 7, 5, 1} // work
+	firstState := []int{2, 9, 7, 1, 3, 5, 8, 4, 6} // work too
 	State := board.StateOfBoard{
 		3,
 		board.InitMove,
