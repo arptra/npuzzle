@@ -19,6 +19,7 @@ func GetPath(context *gin.Context) {
 
 func PutState(context *gin.Context) {
 	var arr []int
+	var emptyTileIndex int
 
 	if err := context.ShouldBindJSON(&globalvars.InputState); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -27,13 +28,18 @@ func PutState(context *gin.Context) {
 	globalvars.ALGO_END = false // if previous GET request not 200
 
 	arr = globalvars.InputState[globalvars.InputStateKey]
-	indexEmptyTile := globalvars.InputState[globalvars.IndexEmptyTileKey][0]
+	emptyTile := globalvars.InputState[globalvars.EmptyTileKey][0]
+	for i := range arr {
+		if emptyTile == arr[i] {
+			emptyTileIndex = i
+		}
+	}
 
 	state := board.StateOfBoard{
 		int(math.Sqrt(float64(len(arr)))),
 		board.InitMove,
-		indexEmptyTile,
-		indexEmptyTile,
+		emptyTileIndex,
+		emptyTileIndex,
 		arr,
 		nil,
 		nil,
@@ -41,8 +47,8 @@ func PutState(context *gin.Context) {
 	goalState := board.StateOfBoard{
 		int(math.Sqrt(float64(len(arr)))),
 		board.InitMove,
-		indexEmptyTile,
-		indexEmptyTile,
+		emptyTileIndex,
+		emptyTileIndex,
 		board.GetGoalState(int(math.Sqrt(float64(len(arr))))),
 		nil,
 		nil,
