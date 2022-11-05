@@ -4,6 +4,7 @@ import (
 	"N-puzzle-GO/globalvars"
 	"N-puzzle-GO/pkg/algo"
 	"N-puzzle-GO/pkg/board"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"math"
 	"net/http"
@@ -34,7 +35,10 @@ func PutState(context *gin.Context) {
 			emptyTileIndex = i
 		}
 	}
-
+	for i := range arr { // some crutch cause I do not want to debug react, sorry
+		arr[i]++
+	}
+	fmt.Println(arr)
 	state := board.StateOfBoard{
 		int(math.Sqrt(float64(len(arr)))),
 		board.InitMove,
