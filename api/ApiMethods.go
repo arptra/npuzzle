@@ -26,16 +26,12 @@ func GetPath(context *gin.Context) {
 	}
 }
 
-func PutState(context *gin.Context) {
+func GetAlgo(context *gin.Context) {
 	var arr []int
 	var emptyTileIndex int
 
-	if err := context.ShouldBindJSON(&globalvars.InputState); err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+	context.AbortWithStatus(200)
 	globalvars.ALGO_END = false // if previous GET request not 200
-
 	arr = globalvars.InputState[globalvars.InputStateKey]
 	emptyTile := globalvars.InputState[globalvars.EmptyTileKey][0]
 	for i := range arr {
@@ -43,7 +39,7 @@ func PutState(context *gin.Context) {
 			emptyTileIndex = i
 		}
 	}
-	for i := range arr { // some crutch cause I do not want to debug react, sorry
+	for i := range arr { // some crutch because I do not want to debug react, sorry
 		arr[i]++
 	}
 	fmt.Println(arr)
@@ -71,5 +67,13 @@ func PutState(context *gin.Context) {
 	status := algo.AlgoStart(state, goalState)
 	if status == -1 {
 		globalvars.STOP_CALC = false
+	}
+}
+
+func PutState(context *gin.Context) {
+	if err := context.ShouldBindJSON(&globalvars.InputState); err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		context.AbortWithStatus(200)
+		return
 	}
 }
