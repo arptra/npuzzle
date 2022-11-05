@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-func StopCalc(context *gin.Context) {
+func GetStop(context *gin.Context) {
 	if globalvars.ALGO_END == false {
 		globalvars.STOP_CALC = true
 	} else {
@@ -26,7 +26,7 @@ func GetPath(context *gin.Context) {
 	}
 }
 
-func GetAlgo(context *gin.Context) {
+func StartAlgo(context *gin.Context) {
 	var arr []int
 	var emptyTileIndex int
 
