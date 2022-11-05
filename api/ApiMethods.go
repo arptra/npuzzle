@@ -10,6 +10,14 @@ import (
 	"net/http"
 )
 
+func StopCalc(context *gin.Context) {
+	if globalvars.ALGO_END == false {
+		globalvars.STOP_CALC = true
+	} else {
+		globalvars.STOP_CALC = false
+	}
+}
+
 func GetPath(context *gin.Context) {
 	if globalvars.ALGO_END == true {
 		context.JSON(200, globalvars.SuccessPath)
@@ -57,8 +65,11 @@ func PutState(context *gin.Context) {
 		nil,
 		nil,
 	}
-	//board.PrintState(state)
-	//board.PrintState(goalState)
+	board.PrintState(state)
+	board.PrintState(goalState)
 
-	algo.AlgoStart(state, goalState)
+	status := algo.AlgoStart(state, goalState)
+	if status == -1 {
+		globalvars.STOP_CALC = false
+	}
 }

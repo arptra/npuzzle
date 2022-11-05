@@ -14,6 +14,9 @@ func AlgoStart(start, goal board.StateOfBoard) int {
 	threshold := ManhattanDist(start, goal)
 	for {
 		temp := Search(start, goal, 0, threshold) //function search(node,g score,threshold)
+		if temp == -1 {
+			return -1
+		}
 		fmt.Println(threshold)
 		if FOUND { // if goal FOUND
 			FOUND = false // for SERVER_MODE == true
@@ -44,6 +47,9 @@ func Search(node, goal board.StateOfBoard, g, threshold float64) float64 {
 	}
 	min := math.MaxFloat64
 	for _, newNode := range board.GetAllState(node) {
+		if globalvars.STOP_CALC == true {
+			return -1
+		}
 		node.To = &newNode
 		newNode.From = &node
 		temp := Search(newNode, goal, g+1, threshold)
