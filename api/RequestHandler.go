@@ -5,6 +5,6 @@ import (
 )
 
 func RequestHandler(router *gin.Engine) {
-	router.PUT("/api/v1/state/", PutState)
-	router.GET("/api/v1/path/", GetPath)
+	router.PUT("/api/v1/state", PutState)
+	router.GET("/api/v1/path", GetPath)
 }
