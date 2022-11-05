@@ -22,7 +22,7 @@ var InitMove = EmptyTileMove{"NULL", 0, 0}
 //var MoveRight = EmptyTileMove{"E", 1, 0}
 //var InitMove = EmptyTileMove{"NULL", 0, 0}
 
-//var Moves = []EmptyTileMove{MoveUP, MoveDown, MoveLeft, MoveRight}
+// var Moves = []EmptyTileMove{MoveUP, MoveDown, MoveLeft, MoveRight}
 var Moves = []EmptyTileMove{MoveUP, MoveRight, MoveDown, MoveLeft}
 
 type StateOfBoard struct {

@@ -4,7 +4,6 @@ import (
 	"N-puzzle-GO/globalvars"
 	"N-puzzle-GO/pkg/algo"
 	"N-puzzle-GO/pkg/board"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"math"
 	"net/http"
@@ -27,13 +26,14 @@ func PutState(context *gin.Context) {
 	}
 	globalvars.ALGO_END = false // if previous GET request not 200
 
-	arr = globalvars.InputState[globalvars.InputKey]
-	fmt.Println(arr)
+	arr = globalvars.InputState[globalvars.InputStateKey]
+	indexEmptyTile := globalvars.InputState[globalvars.IndexEmptyTileKey][0]
+
 	state := board.StateOfBoard{
 		int(math.Sqrt(float64(len(arr)))),
 		board.InitMove,
-		arr[len(arr)-1],
-		arr[len(arr)-1],
+		indexEmptyTile,
+		indexEmptyTile,
 		arr,
 		nil,
 		nil,
@@ -41,14 +41,14 @@ func PutState(context *gin.Context) {
 	goalState := board.StateOfBoard{
 		int(math.Sqrt(float64(len(arr)))),
 		board.InitMove,
-		arr[len(arr)-1],
-		arr[len(arr)-1],
+		indexEmptyTile,
+		indexEmptyTile,
 		board.GetGoalState(int(math.Sqrt(float64(len(arr))))),
 		nil,
 		nil,
 	}
-	board.PrintState(state)
-	board.PrintState(goalState)
+	//board.PrintState(state)
+	//board.PrintState(goalState)
 
 	algo.AlgoStart(state, goalState)
 }
